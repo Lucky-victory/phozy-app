@@ -1,0 +1,77 @@
+{
+   "albums": [
+      {
+         "id": 1,
+         "title": "first album",
+         "description": "This is first album",
+         "userId": 1,
+         "private": false,
+         "photos": [
+            {
+               "id": 1,
+               "userId": 1,
+               "albumId": 1,
+               "url": "https://images.pexels.com/photos/11589897/pexels-photo-11589897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+               "altText": "blank",
+               "createdAt": "2022-05-25T00:00:00"
+            }
+         ]
+      },
+      {
+         "id": 2,
+         "title": "second album",
+         "description": "This is second album",
+         "userId": 1,
+         "private": true,
+         "photos": [
+            {
+               "id": 1,
+               "userId": 1,
+               "albumId": 2,
+               "url": "https://images.pexels.com/photos/9401939/pexels-photo-9401939.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+               "altText": "blank",
+               "createdAt": "2022-05-25T00:00:00"
+            }
+         ]
+      },
+      {
+         "id": 3,
+         "title": "third album",
+         "description": "This is third album",
+         "userId": 2,
+         "private": false,
+         "photos": [
+            {
+               "id": 1,
+               "userId": 2,
+               "albumId": 3,
+               "url": "https://images.pexels.com/photos/10673160/pexels-photo-10673160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+               "altText": "blank",
+               "createdAt": "2022-05-25T00:00:00"
+            }
+         ]
+      },
+      {
+         "id": 4,
+         "title": "fourth album",
+         "description": "This is fourth album",
+         "userId": 2,
+         "private": true,
+         "photos": [
+            {
+               "id": 1,
+               "userId": 2,
+               "albumId": 4,
+               "url": "https://images.pexels.com/photos/4113831/pexels-photo-4113831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+               "altText": "blank",
+               "createdAt": "2022-05-25T00:00:00"
+            }
+         ]
+      }
+   ],
+   "currentUser": {
+      "id": 1,
+      "profileImage": "https://randomuser.me/api/portraits/women/13.jpg",
+      "username": "lucky_v"
+   }
+}
