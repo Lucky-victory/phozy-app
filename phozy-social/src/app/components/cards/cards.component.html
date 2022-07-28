@@ -1,3 +1,9 @@
-<p>
-  cards works!
-</p>
+<div class="cards-container">
+  
+  <app-single-card
+  *ngFor="let photo of albums"
+  [photo]="photo"
+  >
+    
+  </app-single-card>
+</div>
