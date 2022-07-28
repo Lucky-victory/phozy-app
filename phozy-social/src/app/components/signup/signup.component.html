@@ -1,47 +1,57 @@
-<div class="signup-form-container" >
-  
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>
-      Create an account
-    </ion-card-title>
-  </ion-card-header>
-<ion-card-content>
-  
-    <form [formGroup]="signUpForm" >
-      <ion-item>
-        
-        <ion-label for="fullname" position="floating"> Fullname:</ion-label>
-        <ion-input formControlName="fullname" type="text" id="fullname" ></ion-input>
-      </ion-item>
+<div class="signup-form-container">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Create an account </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="signUpForm">
         <ion-item>
-
-      <ion-label for="email" position="floating"> Email:</ion-label>
-      <ion-input type="email" formControlName="email" id="email"></ion-input>
-    </ion-item>
-      
+          <ion-label for="fullname" position="floating"> Fullname:</ion-label>
+          <ion-input
+            formControlName="fullname"
+            type="text"
+            id="fullname"
+          ></ion-input>
+        </ion-item>
         <ion-item>
+          <ion-label for="email" position="floating"> Email:</ion-label>
+          <ion-input
+            type="email"
+            formControlName="email"
+            id="email"
+          ></ion-input>
+        </ion-item>
 
-      <ion-label for="username" position="floating"> Username:</ion-label>
-      <ion-input type="text" formControlName="username" id="username"></ion-input>
-    </ion-item>
-      
         <ion-item>
+          <ion-label for="username" position="floating"> Username:</ion-label>
+          <ion-input
+            type="text"
+            formControlName="username"
+            id="username"
+          ></ion-input>
+        </ion-item>
 
-      <ion-label for="password" position="floating"> Password:</ion-label>
-      <ion-input type="password" formControlName="password" id="password"></ion-input>
-      <ion-note>min: 6 characters</ion-note>
-       </ion-item>
-      
-      
-      <br>
-      <ion-button type="button" expand="block" size="large">Sign Up</ion-button>
-    
-</form>
+        <ion-item>
+          <ion-label for="password" position="floating"> Password:</ion-label>
+          <ion-input
+            type="password"
+            formControlName="password"
+            id="password"
+          ></ion-input>
+          <ion-note>min: 6 characters</ion-note>
+        </ion-item>
 
-</ion-card-content>
-
-</ion-card>
+        <br />
+        <ion-button
+          type="button"
+          expand="block"
+          size="large"
+          [disabled]="!signUpForm.valid"
+          >Sign Up</ion-button
+        >
+      </form>
+    </ion-card-content>
+  </ion-card>
 </div>
 <!--
 
