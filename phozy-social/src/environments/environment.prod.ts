@@ -1,3 +1,3 @@
 export const environment = {
-  production: true
+  production: true,apiBaseUrl:'https://phozy-api.herokuapp.com/api'
 };

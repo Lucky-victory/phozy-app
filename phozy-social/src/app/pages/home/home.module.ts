@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { CardsModule } from 'src/app/components/cards/cards.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @NgModule({
@@ -17,6 +18,6 @@ import { ApiService } from '../../services/api.service';
     IonicModule,
     HomePageRoutingModule,CardsModule,HttpClientModule
   ],
-  declarations: [HomePage],providers:[ApiService]
+  declarations: [HomePage],providers:[ApiService,AuthService]
 })
 export class HomePageModule {}

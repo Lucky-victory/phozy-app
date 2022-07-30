@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import {OnInit} from '@angular/core'
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
-albums:any
-  constructor(private apiService:ApiService ) {
+export class HomePage implements OnInit ,DoCheck{
+  albums!: any;
+  isLoggedIn!: boolean;
+  constructor(private apiService:ApiService,private authService:AuthService ) {
     
   }
 
   ngOnInit() {
-    this.apiService.getAlbums().subscribe((value => {
-      this.albums = value.photos ;
+    this.apiService.getGeneral().subscribe((response => {
+      this.albums = response.data ;
+  console.log(response);
+  
     
     }));
+    this.isLoggedIn=this.authService.isLoggedIn()
+  }
+  ngDoCheck() {
+    this.isLoggedIn=this.authService.isLoggedIn()
     
-}
+  }
+  logout() {
+    this.authService.logout()
+  }
 }

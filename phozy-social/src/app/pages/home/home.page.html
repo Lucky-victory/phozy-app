@@ -3,9 +3,15 @@
     <ion-title>
       Phozy
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/account/login']">Sign in</ion-button>
-      <ion-button [routerLink]="['/account/sign-up']">Sign up</ion-button>
+    <ion-buttons slot="end" *ngIf="!isLoggedIn">
+      <ion-button [routerLink]="['/sign-in']">Sign in</ion-button>
+      <ion-button [routerLink]="['/sign-up']">Sign up</ion-button>
+
+    </ion-buttons>
+    <ion-buttons *ngIf="isLoggedIn" slot="end">
+      <ion-button (click)="logout()">
+        Log out
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,8 +28,16 @@
     
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
-    
+    <ion-fab-list side="top">
+
+      <ion-fab-button title="upload images" [routerLink]="[!isLoggedIn ? '/sign-in':'/new-photo']">
+        <ion-icon name="image-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button title="add new album" [routerLink]="[!isLoggedIn ? '/sign-in':'/new-album']">
+      <ion-icon name="albums-outline" ></ion-icon>
+    </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>

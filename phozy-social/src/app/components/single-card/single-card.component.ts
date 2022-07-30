@@ -16,15 +16,15 @@ export class SingleCardComponent implements OnInit {
 
   like(photo) {
     if (!this.isAuthenticated) {
-      alert('not auth, please sign up or login')
+      alert('not auth, please sign up or signIn')
       return
     }
-    photo.liked = !photo.liked;
+    photo.liked = !photo?.liked;
 this.onPhotoLike.emit(photo)
   }
   addToAlbum(photo) {
     if (!this.isAuthenticated) {
-      alert('not auth, please sign up or login')
+      alert('not auth, please sign up or signIn')
       return
     }
     

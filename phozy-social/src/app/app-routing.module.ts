@@ -12,13 +12,33 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'account',
-    loadChildren: () => import('./pages/login-signup/login-signup.module').then(m => m.LoginSignupPageModule),
+    path: 'sign-in',
+    loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInPageModule),
+  },
+  
+  {
+    path: 'user-profile',
+    loadChildren: () => import('./pages/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   },
   {
+    path: 'albums',
+    loadChildren: () => import('./pages/albums/albums.module').then( m => m.AlbumsPageModule)
+  },
+  {
+    path: 'new-album',
+    loadChildren: () => import('./pages/new-album/new-album.module').then( m => m.NewAlbumPageModule)
+  },
+  {
+    path: 'new-photo',
+    loadChildren: () => import('./pages/new-photo/new-photo.module').then( m => m.NewPhotoPageModule)
+  },{
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  }
+  },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
 ];
 
 @NgModule({

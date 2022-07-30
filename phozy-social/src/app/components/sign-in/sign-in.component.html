@@ -1,13 +1,16 @@
-<div class="login-form-container">
+<div class="signIn-form-container">
   <ion-card>
+    
     <ion-card-header>
-      <ion-card-title> Login </ion-card-title>
+      <ion-card-title> Sign In </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="loginForm">
+      <ion-text color="danger" *ngIf="errorMessage" class="error-message">{{errorMessage}}</ion-text>
+      <br>
+      <form [formGroup]="signInForm">
         <ion-item>
           <ion-label for="emailOrUsername" position="floating">
-            Email:</ion-label
+            Email or Username:</ion-label
           >
           <ion-input
             type="text"
@@ -17,9 +20,9 @@
         </ion-item>
 
         <ion-item>
-          <ion-label for="password" position="floating"> Username:</ion-label>
+          <ion-label for="password" position="floating"> Password:</ion-label>
           <ion-input
-            type="text"
+            type="password"
             formControlName="password"
             id="password"
           ></ion-input>
@@ -28,9 +31,9 @@
         <ion-button
           type="button"
           expand="block"
-          size="large"
-          [disabled]="!loginForm.valid"
-          >Login</ion-button
+          
+          [disabled]="!signInForm.valid || isSending" (click)="signIn()"
+          ><ion-spinner name="bubbles" *ngIf="isSending"></ion-spinner> Sign In</ion-button
         >
       </form>
     </ion-card-content>
