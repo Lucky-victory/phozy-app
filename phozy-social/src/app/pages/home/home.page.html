@@ -24,7 +24,7 @@
   </ion-header>
 
   
-    <app-cards [generalPhotos]="generalResult"></app-cards>
+    <app-cards (onPhotoLike)="likeOrUnlikePhoto($event)" [generalPhotos]="generalResult" [isLoggedIn]="isLoggedIn"></app-cards>
     <ion-item lines="none" [ngStyle]="{marginBottom:'1.5rem',textAlign:'center'}" *ngIf="!isLoading">
 
       <span *ngIf="noMoreData" >You have reach the end</span>

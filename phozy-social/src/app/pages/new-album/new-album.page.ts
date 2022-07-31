@@ -42,7 +42,7 @@ export class NewAlbumPage implements OnInit {
 })
     setTimeout(() => {
       this.newAlbumForm.reset()
-  
-},300)
+  this.infoMessage=undefined
+},2000)
 }
 }

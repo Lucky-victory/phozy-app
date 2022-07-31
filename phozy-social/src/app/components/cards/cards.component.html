@@ -1,7 +1,10 @@
-<div class="cards-container">
-  
-  <app-photo-modal [isModalOpen]="isModalOpen" (onModalClose)="modalClose($event)" [photo]="photoForModal" >
+<app-photo-modal  [isModalOpen]="isModalOpen" (onModalClose)="modalClose($event)" [photo]="photoForModal" >
 </app-photo-modal>
+<app-notif-toast [message]="infoMessage" *ngIf="infoMessage"></app-notif-toast>
+<div class="cards-container">
+  <ng-container *ngIf="!generalPhotos?.length">
+<h2>No Photos Available yet</h2>
+  </ng-container>
   <div class="single-card-container" *ngFor="let photo of generalPhotos">
   
   <div class="single-card-image-wrapper">
@@ -13,7 +16,7 @@
   <ion-img [src]="photo.user?.profile_image" alt=""></ion-img>
 </ion-avatar>
 <div class="single-card-meta__info">
-  <ion-button color="dark" fill="clear"  class="single-card-meta__info-name" (click)="toProfile(photo)">{{photo.user?.fullname}}</ion-button><br>
+  <ion-text color="dark" fill="clear"  class="single-card-meta__info-name" >{{photo.user?.fullname}}</ion-text><br>
   
 </div>
 <div class="single-card-add-btn-wrapper">
@@ -25,9 +28,9 @@
     <ion-icon slot="icon-only" name="share-outline"  ></ion-icon>
 
 </ion-button> -->
-  <ion-button class="single-card-add-btn" (click)="addToAlbum(photo)">
+  <!-- <ion-button class="single-card-add-btn" (click)="addToAlbum(photo)">
     <ion-icon slot="icon-only" name="add" class="add-to-album-icon"></ion-icon>
-  </ion-button>
+  </ion-button> -->
 </ion-buttons>
 </div>
   </div>

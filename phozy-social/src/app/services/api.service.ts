@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError,tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { IResponseResult } from '../interfaces/common';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class ApiService {
     
 
   }
-  getUserAlbums<T>(username:string){
-    return this.http.get<T>(`${this.apiBaseUrl}/profile/${username}/albums`).pipe(catchError(this.errorHandler));
+  getUserAlbums(username:string){
+    return this.http.get<IResponseResult>(`${this.apiBaseUrl}/profile/${username}/albums`).pipe(catchError(this.errorHandler));
   }
   
   getGeneral(page:number=1,perPage=10) {
@@ -37,13 +38,25 @@ export class ApiService {
     return this.http.post(`${this.apiBaseUrl}/photos/${album_id}`,formdata).pipe(catchError(this.errorHandler))
     
   }
-  createNewAlbum<T>(title:string,description?:string,privacy?:boolean) {
-    return this.http.post<T>(`${this.apiBaseUrl}/albums`, { title, description, privacy },
+  createNewAlbum(title:string,description?:string,privacy?:boolean) {
+    return this.http.post(`${this.apiBaseUrl}/albums`, { title, description, privacy },
      ).pipe(catchError(this.errorHandler));
    
   }
-  getUserData<T>(username:string) {
-    return this.http.get<T>(`${this.apiBaseUrl}/profile/${username}`,).pipe(catchError(this.errorHandler));
+  likePhoto(photoId:number) {
+    return this.http.post(`${this.apiBaseUrl}/likes/like/${photoId}`, {},
+     ).pipe(catchError(this.errorHandler));
+   
+  }
+  
+  unlikePhoto(photoId:number) {
+    return this.http.post(`${this.apiBaseUrl}/likes/unlike/${photoId}`, {},
+     ).pipe(catchError(this.errorHandler));
+   
+  }
+  
+  getUserData(username:string) {
+    return this.http.get<IResponseResult>(`${this.apiBaseUrl}/profile/${username}`,).pipe(catchError(this.errorHandler));
    
   }
 }

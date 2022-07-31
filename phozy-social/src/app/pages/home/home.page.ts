@@ -27,13 +27,14 @@ export class HomePage implements OnInit,DoCheck {
   }
   ngDoCheck(): void {
     
-    this.isLoggedIn=this.authService.isLoggedIn()
+    this.isLoggedIn = this.authService.isLoggedIn();
+  
   }
   loadMore(event) {
     this.currentPage += 1;
 this.apiService.getGeneral(this.currentPage).subscribe((response => {
   setTimeout(() => {
-    console.log('Done');
+  
     event.target.complete();
   if (!response.data?.length) {
     this.noMoreData = true;
@@ -45,6 +46,19 @@ this.apiService.getGeneral(this.currentPage).subscribe((response => {
     }, 500);
     
     }));
+  }
+  likeOrUnlikePhoto([photo, isLiked]) {
+    console.log(photo);
+    
+    if (isLiked) {
+      this.apiService.unlikePhoto(photo.pid);
+      console.log('unlike');
+      
+    }
+    else {
+      this.apiService.likePhoto(photo.pid);
+      console.log('like');
+    }
   }
   logout() {
     this.authService.logout();

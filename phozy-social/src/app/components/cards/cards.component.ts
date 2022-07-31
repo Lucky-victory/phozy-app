@@ -8,11 +8,13 @@ import { Router } from '@angular/router';
 })
 export class CardsComponent implements OnInit {
 @Input() generalPhotos=[]
-  isLoggedIn: boolean;
-   @Output() onPhotoLike = new EventEmitter();
+  @Input() isLoggedIn: boolean;
+   @Output() onPhotoLike = new EventEmitter<[number,boolean]>();
   @Output() onAddToAlbum = new EventEmitter();
   isModalOpen: boolean;
   photoForModal: any;
+  isLiked: boolean;
+  infoMessage!: string;
   constructor(private router:Router) { }
 
   ngOnInit() {}
@@ -21,15 +23,18 @@ export class CardsComponent implements OnInit {
 }
   like(photo) {
     if (!this.isLoggedIn) {
-      alert(' please sign up or signIn')
+      this.infoMessage = ' please sign up or signIn';
+      setTimeout(() => {
+        this.infoMessage=undefined
+      },2000)
       return
     }
-    photo.liked = !photo?.liked;
-    this.onPhotoLike.emit(photo);
+    photo.liked = photo.liked;
+    this.onPhotoLike.emit([photo,photo.liked]);
   }
   addToAlbum(photo) {
     if (!this.isLoggedIn) {
-      alert(' please sign up or signIn');
+      this.infoMessage=' please sign up or signIn';
       return
     }
     

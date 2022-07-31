@@ -10,3 +10,8 @@ export interface IAuth{
   user: IAuthUser,
   auth:IAuthToken
 }
+export interface IUser {
+  fullname: string;
+  profile_image?: string;
+  username: string;
+}
