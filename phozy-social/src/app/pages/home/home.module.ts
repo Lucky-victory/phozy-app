@@ -18,6 +18,6 @@ import { AuthService } from '../../services/auth.service';
     IonicModule,
     HomePageRoutingModule,CardsModule,
   ],
-  declarations: [HomePage],providers:[ApiService,AuthService]
+  declarations: [HomePage],providers:[ApiService,AuthService],exports:[HomePage]
 })
 export class HomePageModule {}

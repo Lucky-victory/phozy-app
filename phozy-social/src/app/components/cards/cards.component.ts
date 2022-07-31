@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cards',
@@ -7,8 +8,39 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardsComponent implements OnInit {
 @Input() generalPhotos=[]
-  constructor() { }
+  isLoggedIn: boolean;
+   @Output() onPhotoLike = new EventEmitter();
+  @Output() onAddToAlbum = new EventEmitter();
+  isModalOpen: boolean;
+  photoForModal: any;
+  constructor(private router:Router) { }
 
   ngOnInit() {}
+ toProfile(photo) {
+  this.router.navigate(['/profile',photo?.user?.username])
+}
+  like(photo) {
+    if (!this.isLoggedIn) {
+      alert(' please sign up or signIn')
+      return
+    }
+    photo.liked = !photo?.liked;
+    this.onPhotoLike.emit(photo);
+  }
+  addToAlbum(photo) {
+    if (!this.isLoggedIn) {
+      alert(' please sign up or signIn');
+      return
+    }
+    
+    this.onAddToAlbum.emit(photo);
+  }
+  showPhotoModal(photo) {
+    this.isModalOpen = true;
+    this.photoForModal = photo;
+  }
+  modalClose(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 
 }

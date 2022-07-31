@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SingleCardComponent } from './single-card.component';
+import { PhotoModalComponent } from './photo-modal.component';
 
-describe('SingleCardComponent', () => {
-  let component: SingleCardComponent;
-  let fixture: ComponentFixture<SingleCardComponent>;
+describe('PhotoModalComponent', () => {
+  let component: PhotoModalComponent;
+  let fixture: ComponentFixture<PhotoModalComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleCardComponent ],
+      declarations: [ PhotoModalComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SingleCardComponent);
+    fixture = TestBed.createComponent(PhotoModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

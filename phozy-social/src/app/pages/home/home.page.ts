@@ -29,14 +29,20 @@ export class HomePage implements OnInit,DoCheck {
     
     this.isLoggedIn=this.authService.isLoggedIn()
   }
-  loadMore() {
+  loadMore(event) {
     this.currentPage += 1;
 this.apiService.getGeneral(this.currentPage).subscribe((response => {
+  setTimeout(() => {
+    console.log('Done');
+    event.target.complete();
   if (!response.data?.length) {
     this.noMoreData = true;
-    return
+    event.target.disabled = true;
   }    
+
+      
   this.generalResult.push(...response.data)
+    }, 500);
     
     }));
   }
