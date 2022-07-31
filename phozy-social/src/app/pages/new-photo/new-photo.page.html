@@ -48,7 +48,7 @@
 </div>
 
   <ion-item lines="none">
-            <ion-button size="default" expand="block" (click)="fileInput.click()">
+            <ion-button [disabled]="isSending" size="default" expand="block" (click)="fileInput.click()">
               <ion-icon lazy="true" slot="start" name="image"></ion-icon>
               <ion-label slot="end">Choose Photos</ion-label>
             </ion-button>

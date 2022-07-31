@@ -38,7 +38,7 @@ export class AuthService {
   }
   
   isLoggedIn() {
-    return moment().isBefore(this.getExpiration()) && this.getUser().username !== undefined;
+    return moment().isBefore(this.getExpiration()) && typeof this.getUser().username !== 'undefined';
   }
   isLoggedOut() {
     return !this.isLoggedIn();
