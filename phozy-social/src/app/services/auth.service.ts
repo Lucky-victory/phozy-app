@@ -38,7 +38,7 @@ export class AuthService {
   }
   
   isLoggedIn() {
-    return moment().isBefore(this.getExpiration())
+    return moment().isBefore(this.getExpiration()) && this.getUser().username !== undefined;
   }
   isLoggedOut() {
     return !this.isLoggedIn();
@@ -57,7 +57,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('phozy_token')
     localStorage.removeItem('phozy_token_expiration');
-    
+    localStorage.removeItem('phozy_user');
   }
   getToken() {
     return localStorage.getItem('phozy_token')

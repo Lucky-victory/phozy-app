@@ -20,10 +20,7 @@ const routes: Routes = [
     path: 'profile/:username',
     loadChildren: () => import('./pages/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   },
-  {
-    path: 'albums',
-    loadChildren: () => import('./pages/albums/albums.module').then( m => m.AlbumsPageModule)
-  },
+
   {
     path: 'new-album',
     loadChildren: () => import('./pages/new-album/new-album.module').then( m => m.NewAlbumPageModule)

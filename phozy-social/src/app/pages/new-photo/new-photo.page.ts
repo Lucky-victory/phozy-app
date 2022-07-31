@@ -27,8 +27,11 @@ export class NewPhotoPage implements OnInit{
    }
 
   ngOnInit() {
+    this.fetchUserAlbums()
+  }
+  fetchUserAlbums() {
     const user = this.authService.getUser();
-    this.apiService.getUserAlbums(user.username as string).subscribe((res) => {
+    this.apiService.getUserAlbums(user?.username as string).subscribe((res) => {
       this.userAlbums = res.data as IAlbumResult[];
       
       
@@ -36,12 +39,8 @@ export class NewPhotoPage implements OnInit{
     
   }
   ionViewDidEnter(): void{
-    
-    const user = this.authService.getUser();
-    this.apiService.getUserAlbums(user?.username as string).subscribe((res) => {
-      this.userAlbums = res.data as IAlbumResult[];
-       
-    })
+    this.fetchUserAlbums()
+
   }
 
   addNewPhoto() {

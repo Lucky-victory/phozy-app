@@ -19,11 +19,18 @@ export class HomePage implements OnInit,DoCheck {
 
   ngOnInit() {
     this.apiService.getGeneral(this.currentPage).subscribe((response => {
-      this.generalResult = response.data
       this.isLoading = false;
+      this.generalResult = response.data
     
     }));
     this.isLoggedIn=this.authService.isLoggedIn()
+  }
+  loadData() {
+      this.apiService.getGeneral(1).subscribe((response => {
+      this.isLoading = false;
+      this.generalResult = response.data
+    
+    }));
   }
   ngDoCheck(): void {
     
@@ -46,6 +53,12 @@ this.apiService.getGeneral(this.currentPage).subscribe((response => {
     }, 500);
     
     }));
+  }
+  doRefresh(event) {
+    
+    setTimeout(() => {
+      event.target.complete()
+    },2000)
   }
   likeOrUnlikePhoto([photo, isLiked]) {
     console.log(photo);
