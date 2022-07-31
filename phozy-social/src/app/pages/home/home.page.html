@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Phozy
+      Phozy App
     </ion-title>
     <ion-buttons slot="end" *ngIf="!isLoggedIn">
       <ion-button [routerLink]="['/sign-in']">Sign in</ion-button>
@@ -24,6 +24,11 @@
   </ion-header>
 
   
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
     <app-cards (onPhotoLike)="likeOrUnlikePhoto($event)" [generalPhotos]="generalResult" [isLoggedIn]="isLoggedIn"></app-cards>
     <ion-item lines="none" [ngStyle]="{marginBottom:'1.5rem',textAlign:'center'}" *ngIf="!isLoading">
 
