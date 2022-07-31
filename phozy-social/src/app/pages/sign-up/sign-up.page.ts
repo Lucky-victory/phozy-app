@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router} from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import {catchError} from 'rxjs/operators'
 @Component({
   selector: 'app-sign-up-page',
   templateUrl: './sign-up.page.html',
@@ -7,9 +10,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpPage implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  signUpForm: FormGroup;
+  constructor(private fb: FormBuilder,private router:Router,private authService:AuthService) {
+    this.signUpForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      fullname: ['', [Validators.required, Validators.maxLength(30)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
+          ),
+        ],
+      ],
+      confirmPassword: [
+        '',
+        [
+          Validators.required,
+        ],
+      ],
+      username: ['',Validators.pattern(/^([a-z0-9])/)],
+    });
   }
 
+  ngOnInit() { }
+  signUp(event:Event) {
+event.preventDefault()
+    const value = this.signUpForm.value;
+      this.authService.signUp({fullname:value.fullname,email: value.email, password:value.password,username: value.username,confirm_password:value.confirmPassword}).subscribe(() => {
+        console.log('user added');
+        this.router.navigateByUrl('/')
+      },(error)=>{
+console.log(error)
+alert(JSON.stringify(error))      
+      })
+    
+  }
 }

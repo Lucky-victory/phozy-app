@@ -30,14 +30,15 @@ const routes: Routes = [
   },
   {
     path: 'new-photo',
-    loadChildren: () => import('./pages/new-photo/new-photo.module').then( m => m.NewPhotoPageModule)
-  },{
-    path: '**',
-    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+    loadChildren: () => import('./pages/new-photo/new-photo.module').then(m => m.NewPhotoPageModule)
   },
   {
-    path: 'sign-up',
-    loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+      path: 'sign-up',
+      loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
 ];
 

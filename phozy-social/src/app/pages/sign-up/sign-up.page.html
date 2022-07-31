@@ -5,5 +5,71 @@
 </ion-header>
 
 <ion-content>
+<div class="signup-form-container">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Create an account </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="signUpForm" (ngSubmit)="signUp($event)">
+        <ion-item>
+          <ion-label for="fullname" position="floating"> Fullname:</ion-label>
+          <ion-input
+            formControlName="fullname"
+            type="text"
+            id="fullname"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="email" position="floating"> Email:</ion-label>
+          <ion-input
+            type="email"
+            formControlName="email"
+            id="email"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label for="username" position="floating"> Username:</ion-label>
+          <ion-input
+            type="text"
+            formControlName="username"
+            id="username"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label for="password" position="floating"> Password:</ion-label>
+          <ion-input #password
+            type="password"
+            formControlName="password"
+            id="password"
+          ></ion-input>
+          <ion-note>min: 6 characters</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label for="confirm_password" position="floating"> Confirm password:</ion-label>
+          <ion-input #confirmPassword
+            type="password"
+          formControlName="confirmPassword"
+            id="confirm_password"
+          ></ion-input>
+          <ion-text color="danger" *ngIf="password.value!==confirmPassword.value">Passwords doesn't match</ion-text>
+        </ion-item>
+        
+        <br>
+<ion-text>Already have an account? <ion-button [routerLink]="['/sign-in']" color="primary" fill="clear">Sign in</ion-button> </ion-text>
+        <br />
+        <ion-button
+          type="submit"
+          expand="block"
+        
+          [disabled]="!signUpForm.valid"
+          >Sign Up</ion-button
+        >
+      </form>
+    </ion-card-content>
+  </ion-card>
+</div>
 
 </ion-content>

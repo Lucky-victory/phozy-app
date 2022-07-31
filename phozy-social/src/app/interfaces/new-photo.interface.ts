@@ -1,6 +1,6 @@
 import { FormControl } from "@angular/forms";
 
 export interface INewPhotoForm{
-  userAlbums: FormControl;
+  prevAlbums: FormControl;
 photosUpload:FormControl
 }

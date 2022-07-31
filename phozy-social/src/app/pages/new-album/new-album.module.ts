@@ -8,14 +8,14 @@ import { NewAlbumPageRoutingModule } from './new-album-routing.module';
 
 import { NewAlbumPage } from './new-album.page';
 import { ApiService } from 'src/app/services/api.service';
-import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,ReactiveFormsModule,
-    NewAlbumPageRoutingModule,HttpClientModule
+    NewAlbumPageRoutingModule
   ],
   declarations: [NewAlbumPage],providers:[ApiService]
 })

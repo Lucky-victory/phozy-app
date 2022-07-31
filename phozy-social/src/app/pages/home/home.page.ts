@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit ,DoCheck{
+export class HomePage implements OnInit {
   albums!: any;
   isLoggedIn!: boolean;
   constructor(private apiService:ApiService,private authService:AuthService ) {
@@ -21,10 +21,6 @@ export class HomePage implements OnInit ,DoCheck{
     
     }));
     this.isLoggedIn=this.authService.isLoggedIn()
-  }
-  ngDoCheck() {
-    this.isLoggedIn=this.authService.isLoggedIn()
-    
   }
   logout() {
     this.authService.logout()

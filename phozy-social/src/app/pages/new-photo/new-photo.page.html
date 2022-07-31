@@ -9,7 +9,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-card>
+  <ion-card>
+  <div class="error-message">{{errorMessage}}</div>
   <ion-card-header>
     <ion-card-title>
 
@@ -18,16 +19,16 @@
   <ion-card-content>
  <form [formGroup]="newPhotoForm">
         <ion-item>
-          <ion-label for="albums" position="floating">
+          <ion-label for="user-albums" position="floating">
             Select an album</ion-label
           >
           <ion-select
       
-            formControlName="userAlbums"
-            id="albums"
+            formControlName="prevAlbums"
+            id="user-albums"
           >
-        <ion-select-option>
-          option 1
+        <ion-select-option [value]="album.id" *ngFor="let album of userAlbums">
+      {{album.title}}
         </ion-select-option>
         </ion-select>
         </ion-item>
@@ -43,14 +44,14 @@
 </div>
 
   <ion-item lines="none">
-            <ion-button size="default" expand="block" (click)="f.click()">
+            <ion-button size="default" expand="block" (click)="fileInput.click()">
               <ion-icon lazy="true" slot="start" name="image"></ion-icon>
               <ion-label slot="end">Choose Photos</ion-label>
             </ion-button>
-              <input formControlName="photosUpload" class="ion-hide" #f type="file" (change)="loadImageFromDevice($event)" id="file-input"
-                accept="image/*" multiple maxlength="10">
-                <br>
-<ion-note>Max: 10 photos</ion-note>
+              <input formControlName="photosUpload" class="ion-hide" #fileInput type="file" (change)="loadImageFromDevice($event)" id="file-input"
+                accept="image/*" multiple  max="10"/>
+                
+<ion-note slot="end">Max: 10 photos</ion-note>
          </ion-item>
 
         <br />

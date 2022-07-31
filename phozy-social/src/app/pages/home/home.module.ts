@@ -6,7 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { CardsModule } from 'src/app/components/cards/cards.module';
-import { HttpClientModule } from '@angular/common/http';
+
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -16,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,CardsModule,HttpClientModule
+    HomePageRoutingModule,CardsModule,
   ],
   declarations: [HomePage],providers:[ApiService,AuthService]
 })

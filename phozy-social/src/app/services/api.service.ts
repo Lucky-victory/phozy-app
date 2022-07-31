@@ -29,4 +29,12 @@ export class ApiService {
   errorHandler(error:HttpErrorResponse) {
     return throwError(error||'')
   }
+  uploadPhotosToAlbum(album_id: number, album_images: File[]) {
+    const formdata = new FormData();
+    for (const image of album_images) {
+      formdata.append('album_images',image,image.name) 
+    }
+    return this.http.post(`${this.apiBaseUrl}/photos/${album_id}`,formdata).pipe(catchError(this.errorHandler))
+    
+  }
 }

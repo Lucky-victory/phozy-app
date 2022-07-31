@@ -7,7 +7,9 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { IAuth, IAuthUser } from '../interfaces/auth-user.interface';
 
-@Injectable()
+@Injectable({
+  providedIn:'root'
+})
 export class AuthService {
   private apiBaseUrl: string = environment.apiBaseUrl;
   constructor(private http: HttpClient,private router:Router) {
@@ -27,7 +29,7 @@ export class AuthService {
     headers: {
       'content-type': 'application/json'
     }
-  }).pipe(catchError(this.errorHandler))
+  }).pipe(tap((res)=>this.setSession(res))).pipe(catchError(this.errorHandler))
   
 
   }
@@ -54,7 +56,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem('phozy_token')
     localStorage.removeItem('phozy_token_expiration');
-    
+    this.router.navigateByUrl('/')
+  }
+  getToken() {
+    return localStorage.getItem('phozy_token')
   }
   getExpiration() {
     const expiration = localStorage.getItem('phozy_token_expiration');

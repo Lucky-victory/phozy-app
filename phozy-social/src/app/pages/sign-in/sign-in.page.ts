@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ISignInForm } from 'src/app/interfaces/sign-in.interface';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -10,21 +12,43 @@ import { AuthService } from '../../services/auth.service';
 export class SignInPage implements OnInit {
   result: any;
   errorResult: any;
-  constructor(private authService:AuthService,private router:Router) { }
+  isSending: boolean;
+  errorMessage: string;
+  signInForm:FormGroup<ISignInForm>
+  constructor(private authService:AuthService,private router:Router,private fb:FormBuilder) {
+    this.signInForm = this.fb.group({
+      emailOrUsername: ['', [ Validators.required]],
 
+      password: [
+        '',
+        [
+          Validators.required,
+          ,
+        ],
+      ],
+    });
+  }
+  
   ngOnInit() {
     // if the user is already logged in, redirect back to homepage
     if (this.authService.isLoggedIn()) {
       this.router.navigateByUrl('/')
     }
   }
-  signIn({email_or_username,password}) {
-    
+  signIn() {
+     const email_or_username = this.signInForm.get('emailOrUsername').value;
+    const password = this.signInForm.get('password').value;
+
+    this.errorResult = null;
+    this.isSending = true;
     this.authService.signIn(email_or_username, password).subscribe((res) => {
       this.result = res;
+      this.isSending=false
     this.router.navigateByUrl('/')
     }, error => {
-      this.errorResult=error
+      this.isSending = false;
+      this.errorResult = error;
+      this.errorMessage = this.errorResult?.error?.message;
  }) 
 }
 }
