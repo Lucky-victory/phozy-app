@@ -11,7 +11,8 @@ import { INewAlbumForm } from '../../interfaces/new-album.interface';
 export class NewAlbumPage implements OnInit {
   isSending: boolean;
   isChecked = false;
-newAlbumForm:FormGroup<INewAlbumForm>
+  newAlbumForm: FormGroup<INewAlbumForm>;
+  infoMessage: string;
   constructor(private formBuilder: FormBuilder,private apiService:ApiService) {
     
     this.newAlbumForm = this.formBuilder.group({
@@ -31,7 +32,14 @@ newAlbumForm:FormGroup<INewAlbumForm>
     const privacy = this.newAlbumForm.get('privacy').value;
     const title = this.newAlbumForm.get('title').value;
     const description = this.newAlbumForm.get('description').value;
-
+    this.apiService.createNewAlbum(title, description, privacy).subscribe((res) => {
+      this.isSending = false;
+      this.infoMessage = 'Album successfully added';
+    }, (error) => {
+      
+      this.isSending = false;
+ this.infoMessage='An error occured couldn\'t create album'
+})
     setTimeout(() => {
       this.newAlbumForm.reset()
   

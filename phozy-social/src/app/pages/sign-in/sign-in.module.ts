@@ -6,9 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SignInPageRoutingModule } from './sign-in-routing.module';
 
-import { AuthService } from 'src/app/services/auth.service';
-
-import { SignupModule } from '../../components/signup/signup.module';
+import { AuthService } from 'src/app/services/auth.service';;
 import { SignInPage } from './sign-in.page';
 
 @NgModule({
@@ -16,7 +14,7 @@ import { SignInPage } from './sign-in.page';
     CommonModule,
     FormsModule,
     IonicModule,ReactiveFormsModule,
-    SignInPageRoutingModule,SignupModule,],
+    SignInPageRoutingModule,],
   declarations: [SignInPage],providers:[AuthService]
 })
 export class SignInPageModule {}

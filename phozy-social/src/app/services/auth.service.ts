@@ -12,7 +12,7 @@ import { IAuth, IAuthUser } from '../interfaces/auth-user.interface';
 })
 export class AuthService {
   private apiBaseUrl: string = environment.apiBaseUrl;
-  constructor(private http: HttpClient,private router:Router) {
+  constructor(private http: HttpClient) {
     
   }
   signIn(email_or_username: string, password: string) {
@@ -36,6 +36,7 @@ export class AuthService {
   errorHandler(error:HttpErrorResponse) {
     return throwError(error||'')
   }
+  
   isLoggedIn() {
     return moment().isBefore(this.getExpiration())
   }
@@ -56,7 +57,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('phozy_token')
     localStorage.removeItem('phozy_token_expiration');
-    this.router.navigateByUrl('/')
+    
   }
   getToken() {
     return localStorage.getItem('phozy_token')

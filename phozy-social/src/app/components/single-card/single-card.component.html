@@ -1,14 +1,15 @@
 <div class="single-card-container">
   <div class="single-card-image-wrapper">
-    <img src="{{photo.url}}" alt="" class="single-card-image">
+    <img src="{{photo.url}}" alt=""  class="single-card-image" (click)="showPhotoModal(photo)">
   </div>
 
   <div class="single-card-meta">
-<ion-avatar class="single-card-meta__avatar">
+<ion-avatar  class="single-card-meta__avatar">
   <img src="{{photo.user?.profile_image}}" alt="">
+
 </ion-avatar>
 <div class="single-card-meta__info">
-  <strong class="single-card-meta__info-name">{{photo.user?.fullname}}</strong><br>
+  <ion-button fill="clear" [routerLink]="['/profile']" class="single-card-meta__info-name" (click)="toProfile(photo)">{{photo.user?.fullname}}</ion-button><br>
   
 </div>
 <div class="single-card-add-btn-wrapper">

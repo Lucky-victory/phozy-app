@@ -1,4 +1,4 @@
-import { Component,  OnInit, } from '@angular/core';
+import { Component,  DoCheck,  OnInit, } from '@angular/core';
 import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
 import { IAlbumResult } from 'src/app/interfaces/albums.interface';
 import { IResponseResult } from 'src/app/interfaces/common';
@@ -11,14 +11,14 @@ import { INewPhotoForm } from '../../interfaces/new-photo.interface';
   templateUrl: './new-photo.page.html',
   styleUrls: ['./new-photo.page.scss'],
 })
-export class NewPhotoPage implements OnInit {
+export class NewPhotoPage implements OnInit{
   isSending: boolean = false;
   photosToPreview: string[] = [];
   photosToUpload: File[] = [];
   userAlbums: IAlbumResult[] = [];
   maxPhotoCount = 10;
   newPhotoForm!: FormGroup<INewPhotoForm>;
-  errorMessage!: string;
+  infoMessage!: string;
 
   constructor(private formBuilder: FormBuilder,private apiService:ApiService,private authService:AuthService) {
     this.newPhotoForm = this.formBuilder.group({
@@ -32,6 +32,15 @@ export class NewPhotoPage implements OnInit {
       this.userAlbums = res.data as IAlbumResult[];
       
       
+    });
+    
+  }
+  ionViewDidEnter(): void{
+    
+    const user = this.authService.getUser();
+    this.apiService.getUserAlbums<IResponseResult>(user?.username as string).subscribe((res) => {
+      this.userAlbums = res.data as IAlbumResult[];
+       
     })
   }
 
@@ -43,9 +52,10 @@ export class NewPhotoPage implements OnInit {
       this.isSending = false;
       this.newPhotoForm.reset();
       this.photosToPreview = [];
+      this.infoMessage='Photos uploaded successfully'
     }, (error) => {
       this.isSending = false;
-      console.log(error)
+      this.infoMessage='Sorry, an error occurred please try again'
     })
   }
   loadImageFromDevice(event) {
@@ -53,7 +63,7 @@ export class NewPhotoPage implements OnInit {
     const files = (event.target as HTMLInputElement).files;
     const filesArray = Array.from(files);
     if (filesArray.length > this.maxPhotoCount) {
-      this.errorMessage=`You have chosen more than ${this.maxPhotoCount} images`
+      this.infoMessage=`You have chosen more than ${this.maxPhotoCount} images`
       return 
     }
     if (files.length > 0) {

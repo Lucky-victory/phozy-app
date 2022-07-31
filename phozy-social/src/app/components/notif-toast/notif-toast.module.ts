@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SingleCardComponent } from './single-card.component';
 import { IonicModule } from '@ionic/angular';
+import { NotifToastComponent } from './notif-toast.component';
 
 
 
 @NgModule({
-  declarations: [SingleCardComponent],
+  declarations: [NotifToastComponent],
   imports: [
     CommonModule,IonicModule
   ],
-  exports: [
-    SingleCardComponent
-  ]
+  exports:[NotifToastComponent]
 })
-export class SingleCardModule { }
+export class NotifToastModule { }

@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError,tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
   private apiBaseUrl: string=environment.apiBaseUrl;
-
+  
   constructor(private http: HttpClient,private router:Router) {
     
 
@@ -36,5 +36,14 @@ export class ApiService {
     }
     return this.http.post(`${this.apiBaseUrl}/photos/${album_id}`,formdata).pipe(catchError(this.errorHandler))
     
+  }
+  createNewAlbum<T>(title:string,description?:string,privacy?:boolean) {
+    return this.http.post<T>(`${this.apiBaseUrl}/albums`, { title, description, privacy },
+     ).pipe(catchError(this.errorHandler));
+   
+  }
+  getUserData<T>(username:string) {
+    return this.http.get<T>(`${this.apiBaseUrl}/profile/${username}`,).pipe(catchError(this.errorHandler));
+   
   }
 }

@@ -4,8 +4,8 @@
       Phozy
     </ion-title>
     <ion-buttons slot="end" *ngIf="!isLoggedIn">
-      <ion-button color="primary" [routerLink]="['/sign-in']">Sign in</ion-button>
-      <ion-button fill="solid" color="primary" [routerLink]="['/sign-up']">Sign up</ion-button>
+      <ion-button [routerLink]="['/sign-in']">Sign in</ion-button>
+      <ion-button fill="outline" color="primary" [routerLink]="['/sign-up']">Sign up</ion-button>
 
     </ion-buttons>
     <ion-buttons *ngIf="isLoggedIn" slot="end">
@@ -19,12 +19,17 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Phozy</ion-title>
+      <ion-title size="large">Phozy App</ion-title>
     </ion-toolbar>
   </ion-header>
 
   
-    <app-cards [albums]="albums"></app-cards>
+    <app-cards [generalPhotos]="generalResult"></app-cards>
+    <ion-item lines="none" [ngStyle]="{marginBottom:'1.5rem',textAlign:'center'}" *ngIf="!isLoading">
+
+      <ion-button size="default" [ngStyle]="{margin:'auto'}" (click)="loadMore()" *ngIf="!noMoreData">Load More</ion-button>
+      <span *ngIf="noMoreData" >You have reach the end</span>
+    </ion-item>
     
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>

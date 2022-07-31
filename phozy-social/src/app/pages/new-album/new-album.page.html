@@ -9,6 +9,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <app-notif-toast [message]="infoMessage" *ngIf="infoMessage"></app-notif-toast>
   <ion-card>
 
     <ion-card-content>
@@ -33,7 +34,7 @@
         <br />
   <ion-chip for="privacy">
 <ion-label  [ngStyle]="{'margin-right':'10px'}">Private: </ion-label>
-    <ion-checkbox formControlName="privacy" id="privacy"  ></ion-checkbox>
+    <ion-toggle formControlName="privacy" id="privacy"  ></ion-toggle>
   </ion-chip>
         <br />
         <br />

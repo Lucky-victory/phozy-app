@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SignupComponent } from './signup.component';
+import { NotifToastComponent } from './notif-toast.component';
 
-describe('SignupComponent', () => {
-  let component: SignupComponent;
-  let fixture: ComponentFixture<SignupComponent>;
+describe('NotifToastComponent', () => {
+  let component: NotifToastComponent;
+  let fixture: ComponentFixture<NotifToastComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignupComponent ],
+      declarations: [ NotifToastComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SignupComponent);
+    fixture = TestBed.createComponent(NotifToastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

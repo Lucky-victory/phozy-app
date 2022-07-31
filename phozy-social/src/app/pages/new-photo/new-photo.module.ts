@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { NewPhotoPageRoutingModule } from './new-photo-routing.module';
 
 import { NewPhotoPage } from './new-photo.page';
+import { NotifToastModule } from 'src/app/components/notif-toast/notif-toast.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,ReactiveFormsModule,
-    NewPhotoPageRoutingModule,
+    NewPhotoPageRoutingModule,NotifToastModule
   ],
   declarations: [NewPhotoPage],
 })

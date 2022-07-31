@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import {catchError} from 'rxjs/operators'
+
 @Component({
   selector: 'app-sign-up-page',
   templateUrl: './sign-up.page.html',
@@ -11,6 +11,7 @@ import {catchError} from 'rxjs/operators'
 export class SignUpPage implements OnInit {
 
   signUpForm: FormGroup;
+  isSending: boolean;
   constructor(private fb: FormBuilder,private router:Router,private authService:AuthService) {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -36,14 +37,14 @@ export class SignUpPage implements OnInit {
 
   ngOnInit() { }
   signUp(event:Event) {
-event.preventDefault()
+    event.preventDefault();
+     this.isSending = true;
     const value = this.signUpForm.value;
       this.authService.signUp({fullname:value.fullname,email: value.email, password:value.password,username: value.username,confirm_password:value.confirmPassword}).subscribe(() => {
-        console.log('user added');
+        this.isSending = false;
         this.router.navigateByUrl('/')
       },(error)=>{
-console.log(error)
-alert(JSON.stringify(error))      
+        this.isSending = false;  
       })
     
   }
