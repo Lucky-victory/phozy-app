@@ -12,12 +12,14 @@ export class HomePage implements OnInit,DoCheck {
   isLoggedIn!: boolean;
   currentPage = 1;
   noMoreData:boolean;
-  isLoading: boolean=true;
+  isLoading: boolean = true;
+  footerInfo: string;
   constructor(private apiService:ApiService,private authService:AuthService,private router:Router ) {
     
   }
 
   ngOnInit() {
+    this.footerInfo = 'This project was built for Planetscale X Hashnode hackathon';
     this.apiService.getGeneral(this.currentPage).subscribe((response => {
       this.isLoading = false;
       this.generalResult = response.data
@@ -26,9 +28,11 @@ export class HomePage implements OnInit,DoCheck {
     this.isLoggedIn=this.authService.isLoggedIn()
   }
   loadData() {
+    console.log('is refresh');
+    
       this.apiService.getGeneral(1).subscribe((response => {
       this.isLoading = false;
-      this.generalResult = response.data
+      this.generalResult=response.data
     
     }));
   }
@@ -55,7 +59,7 @@ this.apiService.getGeneral(this.currentPage).subscribe((response => {
     }));
   }
   doRefresh(event) {
-    
+    this.loadData()
     setTimeout(() => {
       event.target.complete()
     },2000)
