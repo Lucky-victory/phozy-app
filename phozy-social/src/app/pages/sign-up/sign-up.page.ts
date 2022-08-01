@@ -21,7 +21,7 @@ export class SignUpPage implements OnInit {
         [
           Validators.required,
           Validators.pattern(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
+            /^(?=.*?[a-zA-Z]).{6,}$/gi
           ),
         ],
       ],
