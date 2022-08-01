@@ -28,7 +28,6 @@ export class HomePage implements OnInit,DoCheck {
     this.isLoggedIn=this.authService.isLoggedIn()
   }
   loadData() {
-    console.log('is refresh');
     
       this.apiService.getGeneral(1).subscribe((response => {
       this.isLoading = false;
@@ -64,6 +63,7 @@ this.apiService.getGeneral(this.currentPage).subscribe((response => {
       event.target.complete()
     },2000)
   }
+  // not yet implemented
   likeOrUnlikePhoto([photo, isLiked]) {
     console.log(photo);
     
