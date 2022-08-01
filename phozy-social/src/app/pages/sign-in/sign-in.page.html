@@ -5,6 +5,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <app-notif-toast [message]="infoMessage" *ngIf="infoMessage"></app-notif-toast>
+
 <div class="sign-in-form-container">
   <ion-card>
     
@@ -12,7 +14,7 @@
       <ion-card-title> Sign In </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-text color="danger" *ngIf="errorMessage" class="error-message">{{errorMessage}}</ion-text>
+      <ion-text color="danger" class="error-message">{{errorMessage}}</ion-text>
       <br>
       <form [formGroup]="signInForm">
         <ion-item>
@@ -29,10 +31,11 @@
         <ion-item>
           <ion-label for="password" position="floating"> Password:</ion-label>
           <ion-input
-            type="password"
+         type="{{isText? 'text':'password'}}"
             formControlName="password"
             id="password"
           ></ion-input>
+              <ion-icon slot="end" name="{{isText ? 'eye-off-outline':'eye-outline'}}" (click)="passwordToText()"></ion-icon>
         </ion-item>
         <br>
         <ion-text>Don't have an account yet? <ion-button [routerLink]="['/sign-up']" color="primary" fill="clear">Sign up</ion-button> </ion-text>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -12,7 +13,11 @@ export class SignUpPage implements OnInit {
 
   signUpForm: FormGroup;
   isSending: boolean;
-  constructor(private fb: FormBuilder,private router:Router,private authService:AuthService) {
+  errorMessage: string;
+  errorResult: any;
+  infoMessage: string;
+  isText: boolean;
+  constructor(private fb: FormBuilder,private location:Location,private authService:AuthService) {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       fullname: ['', [Validators.required, Validators.maxLength(30)]],
@@ -21,7 +26,7 @@ export class SignUpPage implements OnInit {
         [
           Validators.required,
           Validators.pattern(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
+            /^(?=.*?[a-zA-Z0-9]).{6,}$/
           ),
         ],
       ],
@@ -31,7 +36,7 @@ export class SignUpPage implements OnInit {
           Validators.required,
         ],
       ],
-      username: ['',Validators.pattern(/^([a-z0-9])/)],
+      username: ['',Validators.pattern(/([a-z0-9])/gi)],
     });
   }
 
@@ -42,10 +47,37 @@ export class SignUpPage implements OnInit {
     const value = this.signUpForm.value;
       this.authService.signUp({fullname:value.fullname,email: value.email, password:value.password,username: value.username,confirm_password:value.confirmPassword}).subscribe(() => {
         this.isSending = false;
-        this.router.navigateByUrl('/')
+         this.infoMessage='Sign up successful'
+        setTimeout(() => {
+          
+          this.location.historyGo(-1);
+        }, 2500)
       },(error)=>{
-        this.isSending = false;  
+        this.isSending = false;
+        this.errorResult = error;
+        
+        //if the server returns an array errors
+        if (this.errorResult?.error?.errors) {
+          
+          this.errorMessage = this.errorResult?.error?.errors?.map((err) => {
+          
+            return [
+              `${err?.param}: ${err?.message}`
+            ]
+          }).join('\n\t\n');
+        
+        }
+          else if (this.errorResult?.error?.message) {
+            
+          this.errorMessage = this.errorResult?.error?.message;
+        }
+        else {
+          this.errorMessage = this.errorResult?.message;
+        }
       })
     
+  }
+  passwordToText() {
+    this.isText = !this.isText;
   }
 }
